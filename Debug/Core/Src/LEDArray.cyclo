@@ -1,0 +1,5 @@
+../Core/Src/LEDArray.cpp:10:1:LEDArray::LEDArray(GPIO_TypeDef*, uint16_t*, uint8_t)	2
+../Core/Src/LEDArray.cpp:17:6:void LEDArray::setnleds(int)	4
+../Core/Src/LEDArray.cpp:26:6:void LEDArray::restleds()	2
+../Core/Src/LEDArray.cpp:31:1:LEDArray::~LEDArray()	1
+../Core/Src/LEDArray.cpp:31:1:virtual LEDArray::~LEDArray()	1
