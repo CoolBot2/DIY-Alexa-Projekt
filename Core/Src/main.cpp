@@ -19,12 +19,21 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "string.h"
-#include "math.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <math.h>
+#include <iostream>
 #include "LEDArray.h"
+#include "funkSteckdose.h"
+#define BUF_LEN 64
+uint32_t i2sBuf[BUF_LEN];
+
+uint32_t avg=0;
 uint32_t value;
+
+
 uint16_t pins[]={
 		GPIO_PIN_12,GPIO_PIN_11,GPIO_PIN_10,GPIO_PIN_9,GPIO_PIN_8,GPIO_PIN_6,GPIO_PIN_5,GPIO_PIN_4,GPIO_PIN_3,GPIO_PIN_1,
 
@@ -57,6 +66,10 @@ ADC_HandleTypeDef hadc1;
 
 ETH_HandleTypeDef heth;
 
+I2S_HandleTypeDef hi2s3;
+
+TIM_HandleTypeDef htim2;
+
 UART_HandleTypeDef huart3;
 
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
@@ -72,28 +85,20 @@ static void MX_ETH_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_TIM2_Init(void);
+static void MX_I2S3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void testLEDBar(){
-	uint16_t pins[]={
-			GPIO_PIN_12,GPIO_PIN_11,GPIO_PIN_10,GPIO_PIN_9,GPIO_PIN_8,GPIO_PIN_6,GPIO_PIN_5,GPIO_PIN_4,GPIO_PIN_3,GPIO_PIN_1,
 
-	};
-LEDArray bar(GPIOB,pins,10);
-bar.setnleds(5);
-
-}
 void testLEDBarWithPot(){
 
 HAL_ADC_Start(&hadc1);
 HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);//wait
  value = HAL_ADC_GetValue(&hadc1);//0-->4000  400*10
- int n=5;
-
 
 bar.setnleds(round(value/400));
 
@@ -102,6 +107,10 @@ bar.setnleds(round(value/400));
 
 HAL_Delay(100);
 
+}
+void testSteckdoseEinAus(){
+funkSteckdose Steckdose(htim2);
+Steckdose.aus();
 }
 /* USER CODE END 0 */
 
@@ -137,8 +146,13 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_ADC1_Init();
+  MX_TIM2_Init();
+  MX_I2S3_Init();
   /* USER CODE BEGIN 2 */
 
+
+
+  testSteckdoseEinAus();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -148,8 +162,23 @@ int main(void)
 	  char msg[32];
 
 	  testLEDBarWithPot();
-	  sprintf(msg,"%3u \r \n",(int)value);
+
+	  HAL_StatusTypeDef st =   HAL_I2S_Receive(&hi2s3, (uint16_t*)i2sBuf, BUF_LEN, HAL_MAX_DELAY);
+	  if (st != HAL_OK) {
+	  sprintf(msg,"%3u \r \n",(int)1);
 	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	      // hier kurz LED einschalten oder in Debugger schauen
+	      avg = 0xFFFFFFFF; // damit du siehst, dass was schief geht
+	  }
+	         // einfache Amplitudenanalyse
+	         uint64_t sum = 0;
+	         for (int i = 0; i < BUF_LEN; i++)
+	         {
+	             int32_t sample = (int32_t)i2sBuf[i];
+	             if (sample < 0) sample = -sample;
+	             sum += sample;
+	         }
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -304,6 +333,85 @@ static void MX_ETH_Init(void)
 }
 
 /**
+  * @brief I2S3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2S3_Init(void)
+{
+
+  /* USER CODE BEGIN I2S3_Init 0 */
+
+  /* USER CODE END I2S3_Init 0 */
+
+  /* USER CODE BEGIN I2S3_Init 1 */
+
+  /* USER CODE END I2S3_Init 1 */
+  hi2s3.Instance = SPI3;
+  hi2s3.Init.Mode = I2S_MODE_MASTER_TX;
+  hi2s3.Init.Standard = I2S_STANDARD_PHILIPS;
+  hi2s3.Init.DataFormat = I2S_DATAFORMAT_16B;
+  hi2s3.Init.MCLKOutput = I2S_MCLKOUTPUT_DISABLE;
+  hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_16K;
+  hi2s3.Init.CPOL = I2S_CPOL_LOW;
+  hi2s3.Init.ClockSource = I2S_CLOCK_PLL;
+  hi2s3.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_ENABLE;
+  if (HAL_I2S_Init(&hi2s3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2S3_Init 2 */
+
+  /* USER CODE END I2S3_Init 2 */
+
+}
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 167;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 65535;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
+}
+
+/**
   * @brief USART3 Initialization Function
   * @param None
   * @retval None
@@ -392,6 +500,9 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOG_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LD1_Pin|GPIO_PIN_1|GPIO_PIN_10|GPIO_PIN_11
                           |GPIO_PIN_12|LD3_Pin|GPIO_PIN_3|GPIO_PIN_4
                           |GPIO_PIN_5|GPIO_PIN_6|LD2_Pin|GPIO_PIN_8
@@ -405,6 +516,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(USER_Btn_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PC0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LD1_Pin PB1 PB10 PB11
                            PB12 LD3_Pin PB3 PB4
