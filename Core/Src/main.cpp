@@ -27,15 +27,20 @@
 #include <iostream>
 #include "LEDArray.h"
 #include "funkSteckdose.h"
-#define BUF_LEN 64
-uint32_t i2sBuf[BUF_LEN];
+#include <limits>
 
-uint32_t avg=0;
-uint32_t value;
 
+const int I2S_BUF_SIZE = 1000;
+
+volatile uint8_t audioReady = 0;
+volatile uint8_t audioHalf = 0;
+
+uint16_t inputBuffer[I2S_BUF_SIZE*2]; // merge 2 consecutive values
+int32_t mergedFrame[I2S_BUF_SIZE/4]; // Why divide by 4?
+int value;
 
 uint16_t pins[]={
-		GPIO_PIN_12,GPIO_PIN_11,GPIO_PIN_10,GPIO_PIN_9,GPIO_PIN_8,GPIO_PIN_6,GPIO_PIN_5,GPIO_PIN_4,GPIO_PIN_3,GPIO_PIN_1,
+		GPIO_PIN_15,GPIO_PIN_11,GPIO_PIN_10,GPIO_PIN_9,GPIO_PIN_8,GPIO_PIN_6,GPIO_PIN_5,GPIO_PIN_4,GPIO_PIN_3,GPIO_PIN_1,
 
 };
 LEDArray bar(GPIOB,pins,10);
@@ -66,7 +71,8 @@ ADC_HandleTypeDef hadc1;
 
 ETH_HandleTypeDef heth;
 
-I2S_HandleTypeDef hi2s3;
+I2S_HandleTypeDef hi2s2;
+DMA_HandleTypeDef hdma_spi2_rx;
 
 TIM_HandleTypeDef htim2;
 
@@ -81,12 +87,13 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_ETH_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
-static void MX_I2S3_Init(void);
+static void MX_I2S2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -110,7 +117,38 @@ HAL_Delay(100);
 }
 void testSteckdoseEinAus(){
 funkSteckdose Steckdose(htim2);
-Steckdose.aus();
+Steckdose.ein();
+}
+
+void processHalfBuffer(uint16_t* buf)
+{
+    for (int i = 0; i < I2S_BUF_SIZE/4; ++i) {
+        uint32_t hi = buf[4*i];
+        uint32_t lo = buf[4*i + 1];
+
+        uint32_t raw32 = (hi << 16) | lo;
+        int32_t signed32 = (int32_t)raw32;
+        int32_t pcm = signed32 >> 14;
+
+        mergedFrame[i] = pcm; // oder mergedFrame[offset + i] bei Streaming
+    }
+}
+
+
+void HAL_I2S_RxHalfCpltCallback(I2S_HandleTypeDef *hi2s){
+	if(hi2s->Instance==SPI2){
+		audioHalf = 1;
+        processHalfBuffer(&inputBuffer[0]);
+
+	}
+}
+
+void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s){
+	if(hi2s->Instance==SPI2){
+		audioReady=1;
+        processHalfBuffer(&inputBuffer[I2S_BUF_SIZE]);
+
+	}
 }
 /* USER CODE END 0 */
 
@@ -142,42 +180,81 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_ETH_Init();
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_ADC1_Init();
   MX_TIM2_Init();
-  MX_I2S3_Init();
+  MX_I2S2_Init();
   /* USER CODE BEGIN 2 */
 
 
 
-  testSteckdoseEinAus();
+
+	  testSteckdoseEinAus();
+	  HAL_I2S_Receive_DMA(&hi2s2, &inputBuffer[0], I2S_BUF_SIZE);
+	  while (!audioReady) {
+
+	  }
+	  int16_t minVal = 32767;
+	  int16_t maxVal = -32768;
+
+	  for (int i = 0; i < I2S_BUF_SIZE; ++i) {
+	      if (inputBuffer[i] < minVal) minVal = inputBuffer[i];
+	      if (inputBuffer[i] > maxVal) maxVal = inputBuffer[i];
+	  }
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  char msg[32];
+	  char msg[64];
+	  int32_t minVal =  std::numeric_limits<int>::max();
+	  int32_t maxVal = std::numeric_limits<int>::min();
+	  int32_t peak;
 
-	  testLEDBarWithPot();
+	  for (int i = 0; i < I2S_BUF_SIZE/4; ++i)
+	  {
+	      int32_t v = mergedFrame[i];
+	      if (v < minVal) minVal = v;
+	      if (v > maxVal) maxVal = v;
 
-	  HAL_StatusTypeDef st =   HAL_I2S_Receive(&hi2s3, (uint16_t*)i2sBuf, BUF_LEN, HAL_MAX_DELAY);
-	  if (st != HAL_OK) {
-	  sprintf(msg,"%3u \r \n",(int)1);
-	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-	      // hier kurz LED einschalten oder in Debugger schauen
-	      avg = 0xFFFFFFFF; // damit du siehst, dass was schief geht
 	  }
-	         // einfache Amplitudenanalyse
-	         uint64_t sum = 0;
-	         for (int i = 0; i < BUF_LEN; i++)
-	         {
-	             int32_t sample = (int32_t)i2sBuf[i];
-	             if (sample < 0) sample = -sample;
-	             sum += sample;
-	         }
+
+	  peak = maxVal - minVal; //amplitude
+
+
+	  if (peak < 0) peak = 0;
+
+
+	  if (peak > 10000) peak = 10000; //can be optimized
+
+
+	  int leds = round( peak / 1000);             // 0…10 LEDs   1500
+
+	  bar.setnleds(leds);
+
+	  snprintf(msg, sizeof(msg), "pcm: pk=%ld \r\n", peak);
+	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	  HAL_Delay(50);
+//	  testLEDBarWithPot();
+//	  if(audioHalf){
+//
+//	  sprintf(msg,"%3u \r \n",(int)1111);
+//	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+//	  }
+//	  if(audioReady){
+//
+//		  sprintf(msg,"%3u \r \n",(int)2222);
+//		  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+//		  }
+//	  snprintf(msg, sizeof(msg), "min = %d, max = %d\r\n", minVal, maxVal);
+//	      HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+//
+//	      HAL_Delay(500);
 
     /* USER CODE END WHILE */
 
@@ -333,36 +410,36 @@ static void MX_ETH_Init(void)
 }
 
 /**
-  * @brief I2S3 Initialization Function
+  * @brief I2S2 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_I2S3_Init(void)
+static void MX_I2S2_Init(void)
 {
 
-  /* USER CODE BEGIN I2S3_Init 0 */
+  /* USER CODE BEGIN I2S2_Init 0 */
 
-  /* USER CODE END I2S3_Init 0 */
+  /* USER CODE END I2S2_Init 0 */
 
-  /* USER CODE BEGIN I2S3_Init 1 */
+  /* USER CODE BEGIN I2S2_Init 1 */
 
-  /* USER CODE END I2S3_Init 1 */
-  hi2s3.Instance = SPI3;
-  hi2s3.Init.Mode = I2S_MODE_MASTER_TX;
-  hi2s3.Init.Standard = I2S_STANDARD_PHILIPS;
-  hi2s3.Init.DataFormat = I2S_DATAFORMAT_16B;
-  hi2s3.Init.MCLKOutput = I2S_MCLKOUTPUT_DISABLE;
-  hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_16K;
-  hi2s3.Init.CPOL = I2S_CPOL_LOW;
-  hi2s3.Init.ClockSource = I2S_CLOCK_PLL;
-  hi2s3.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_ENABLE;
-  if (HAL_I2S_Init(&hi2s3) != HAL_OK)
+  /* USER CODE END I2S2_Init 1 */
+  hi2s2.Instance = SPI2;
+  hi2s2.Init.Mode = I2S_MODE_MASTER_RX;
+  hi2s2.Init.Standard = I2S_STANDARD_PHILIPS;
+  hi2s2.Init.DataFormat = I2S_DATAFORMAT_24B;
+  hi2s2.Init.MCLKOutput = I2S_MCLKOUTPUT_DISABLE;
+  hi2s2.Init.AudioFreq = I2S_AUDIOFREQ_16K;
+  hi2s2.Init.CPOL = I2S_CPOL_LOW;
+  hi2s2.Init.ClockSource = I2S_CLOCK_PLL;
+  hi2s2.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_DISABLE;
+  if (HAL_I2S_Init(&hi2s2) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN I2S3_Init 2 */
+  /* USER CODE BEGIN I2S2_Init 2 */
 
-  /* USER CODE END I2S3_Init 2 */
+  /* USER CODE END I2S2_Init 2 */
 
 }
 
@@ -385,7 +462,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 167;
+  htim2.Init.Prescaler = 83;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 65535;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -480,6 +557,22 @@ static void MX_USB_OTG_FS_PCD_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Stream3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -504,7 +597,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LD1_Pin|GPIO_PIN_1|GPIO_PIN_10|GPIO_PIN_11
-                          |GPIO_PIN_12|LD3_Pin|GPIO_PIN_3|GPIO_PIN_4
+                          |LD3_Pin|GPIO_PIN_15|GPIO_PIN_3|GPIO_PIN_4
                           |GPIO_PIN_5|GPIO_PIN_6|LD2_Pin|GPIO_PIN_8
                           |GPIO_PIN_9, GPIO_PIN_RESET);
 
@@ -525,11 +618,11 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LD1_Pin PB1 PB10 PB11
-                           PB12 LD3_Pin PB3 PB4
+                           LD3_Pin PB15 PB3 PB4
                            PB5 PB6 LD2_Pin PB8
                            PB9 */
   GPIO_InitStruct.Pin = LD1_Pin|GPIO_PIN_1|GPIO_PIN_10|GPIO_PIN_11
-                          |GPIO_PIN_12|LD3_Pin|GPIO_PIN_3|GPIO_PIN_4
+                          |LD3_Pin|GPIO_PIN_15|GPIO_PIN_3|GPIO_PIN_4
                           |GPIO_PIN_5|GPIO_PIN_6|LD2_Pin|GPIO_PIN_8
                           |GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
