@@ -1,17 +1,23 @@
 /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/arm-none-eabi/include/c++/13.3.1/arm-none-eabi/thumb/v7e-m+fp/hard/bits/gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	1
-../Core/Src/main.cpp:88:6:void testLEDBarWithPot()	1
-../Core/Src/main.cpp:102:6:void testSteckdoseEinAus()	1
-../Core/Src/main.cpp:112:5:int main()	1
-../Core/Src/main.cpp:171:6:void SystemClock_Config()	3
-../Core/Src/main.cpp:217:13:void MX_ADC1_Init()	3
-../Core/Src/main.cpp:269:13:void MX_ETH_Init()	2
-../Core/Src/main.cpp:318:13:void MX_TIM2_Init()	4
-../Core/Src/main.cpp:363:13:void MX_USART3_UART_Init()	2
-../Core/Src/main.cpp:396:13:void MX_USB_OTG_FS_PCD_Init()	2
-../Core/Src/main.cpp:431:13:void MX_GPIO_Init()	1
-../Core/Src/main.cpp:510:6:void Error_Handler()	1
-/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/arm-none-eabi/include/c++/13.3.1/cmath:2494:5:constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::round(_Tp) [with _Tp = long unsigned int]	1
-../Core/Src/main.cpp:519:1:void __static_initialization_and_destruction_0()	1
-../Core/Src/main.cpp:519:1:void __static_initialization_and_destruction_1()	1
-../Core/Src/main.cpp:519:1:cpp)	1
-../Core/Src/main.cpp:519:1:cpp)	1
+../Core/Src/main.cpp:104:6:void testLEDBarWithPot()	1
+../Core/Src/main.cpp:118:6:void testSteckdoseEinAus()	1
+../Core/Src/main.cpp:123:6:void processHalfBuffer(uint16_t*)	2
+../Core/Src/main.cpp:138:6:void HAL_I2S_RxHalfCpltCallback(I2S_HandleTypeDef*)	2
+../Core/Src/main.cpp:146:6:void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef*)	2
+../Core/Src/main.cpp:159:5:int main()	10
+../Core/Src/main.cpp:270:6:void SystemClock_Config()	3
+../Core/Src/main.cpp:316:13:void MX_ADC1_Init()	3
+../Core/Src/main.cpp:368:13:void MX_ETH_Init()	2
+../Core/Src/main.cpp:417:13:void MX_I2S2_Init()	2
+../Core/Src/main.cpp:451:13:void MX_TIM2_Init()	4
+../Core/Src/main.cpp:496:13:void MX_USART3_UART_Init()	2
+../Core/Src/main.cpp:529:13:void MX_USB_OTG_FS_PCD_Init()	2
+../Core/Src/main.cpp:562:13:void MX_DMA_Init()	1
+../Core/Src/main.cpp:580:13:void MX_GPIO_Init()	1
+../Core/Src/main.cpp:659:6:void Error_Handler()	1
+/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/arm-none-eabi/include/c++/13.3.1/cmath:2494:5:constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::round(_Tp) [with _Tp = int]	1
+/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/arm-none-eabi/include/c++/13.3.1/cmath:2494:5:constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::round(_Tp) [with _Tp = long int]	1
+../Core/Src/main.cpp:668:1:void __static_initialization_and_destruction_0()	1
+../Core/Src/main.cpp:668:1:void __static_initialization_and_destruction_1()	1
+../Core/Src/main.cpp:668:1:cpp)	1
+../Core/Src/main.cpp:668:1:cpp)	1
