@@ -34,9 +34,14 @@ const int I2S_BUF_SIZE = 1000;
 
 volatile uint8_t audioReady = 0;
 volatile uint8_t audioHalf = 0;
-
+volatile uint8_t isRecording=0;
+volatile uint8_t isFinished=0;
+volatile uint16_t recordIndex=0;
 uint16_t inputBuffer[I2S_BUF_SIZE*2]; // merge 2 consecutive values
 int32_t mergedFrame[I2S_BUF_SIZE/4]; // Why divide by 4?
+int32_t testbuffer[16000];
+int recordStart;
+int duration;
 int value;
 
 uint16_t pins[]={
@@ -115,22 +120,38 @@ bar.setnleds(round(value/400));
 HAL_Delay(100);
 
 }
-void testSteckdoseEinAus(){
-funkSteckdose Steckdose(htim2);
+void SteckdoseEin(){
+	funkSteckdose Steckdose(htim2);
+
 Steckdose.ein();
 }
+void SteckdoseAus(){
+	funkSteckdose Steckdose(htim2);
 
+
+Steckdose.aus();
+
+}
 void processHalfBuffer(uint16_t* buf)
 {
     for (int i = 0; i < I2S_BUF_SIZE/4; ++i) {
         uint32_t hi = buf[4*i];
         uint32_t lo = buf[4*i + 1];
 
-        uint32_t raw32 = (hi << 16) | lo;
-        int32_t signed32 = (int32_t)raw32;
-        int32_t pcm = signed32 >> 14;
+        uint32_t raw = (hi << 16) | lo;
+        int32_t temp = (int32_t)raw;
+        int32_t pcm = temp >> 14;
 
         mergedFrame[i] = pcm; // oder mergedFrame[offset + i] bei Streaming
+        if (isRecording && recordIndex < 16000) {
+        	testbuffer[recordIndex++] = pcm;
+
+
+            if (recordIndex >= 16000) {
+                isRecording = 0;   // Aufnahme beenden
+                isFinished  = 1;
+            }
+        }
     }
 }
 
@@ -141,6 +162,7 @@ void HAL_I2S_RxHalfCpltCallback(I2S_HandleTypeDef *hi2s){
         processHalfBuffer(&inputBuffer[0]);
 
 	}
+
 }
 
 void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s){
@@ -149,6 +171,7 @@ void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s){
         processHalfBuffer(&inputBuffer[I2S_BUF_SIZE]);
 
 	}
+	//value = HAL_GetTick();
 }
 /* USER CODE END 0 */
 
@@ -192,7 +215,7 @@ int main(void)
 
 
 
-	  testSteckdoseEinAus();
+	  //SteckdoseAus();
 	  HAL_I2S_Receive_DMA(&hi2s2, &inputBuffer[0], I2S_BUF_SIZE);
 	  while (!audioReady) {
 
@@ -211,6 +234,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+
 	  char msg[64];
 	  int32_t minVal =  std::numeric_limits<int>::max();
 	  int32_t maxVal = std::numeric_limits<int>::min();
@@ -230,16 +255,54 @@ int main(void)
 	  if (peak < 0) peak = 0;
 
 
-	  if (peak > 10000) peak = 10000; //can be optimized
+	  if (peak > 50000) {
+		  peak = 50000;
+	  SteckdoseEin();
+
+	  } //can be optimized
 
 
-	  int leds = round( peak / 1000);             // 0…10 LEDs   1500
+	  int leds = round( peak / 5000);             // 0…10 LEDs   1500
 
 	  bar.setnleds(leds);
 
+	  //aufnahme test
+
+if(!isRecording && peak == 50000){
+	isRecording = 1;
+		  recordStart = HAL_GetTick(); //start time
+		  snprintf(msg, sizeof(msg), "aufnahme begiinnt...%d",1);
+
+		 	  HAL_UART_Transmit(&huart3,(uint8_t*)msg , strlen(msg), HAL_MAX_DELAY);
+}
+//hrrhrhhr
+	  if(isFinished){
+		  isFinished=0;
+		   duration = HAL_GetTick()-recordStart;
+		   snprintf(msg, sizeof(msg), "duration: %ld \r\n", duration);
+		   	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	  }
+
+	  if (peak >10000 ) {
 	  snprintf(msg, sizeof(msg), "pcm: pk=%ld \r\n", peak);
 	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-	  HAL_Delay(50);
+
+	  }
+
+
+
+
+
+	  //testLEDBarWithPot();
+
+
+
+
+
+
+
+
+	  //HAL_Delay(100);
 //	  testLEDBarWithPot();
 //	  if(audioHalf){
 //
