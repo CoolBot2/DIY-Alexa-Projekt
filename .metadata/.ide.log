@@ -1576,3 +1576,472 @@
 2025-12-29 14:19:56,092 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 1544mS.
 2025-12-29 14:19:56,092 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
 2025-12-29 14:19:56,093 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-12-29 14:54:51,253 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 845270416 Bytes (1073741824)
+2025-12-29 14:54:56,512 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 886164880 Bytes (1073741824)
+2025-12-29 14:55:00,573 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 944885136 Bytes (1073741824)
+2025-12-29 14:55:01,227 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8
+2025-12-29 14:55:01,227 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: I2S
+2025-12-29 14:55:01,227 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-12-29 14:55:01,227 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: ADC
+2025-12-29 14:55:01,227 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-12-29 14:55:01,227 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USB_OTG_FS
+2025-12-29 14:55:01,227 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-12-29 14:55:01,227 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USART
+2025-12-29 14:55:01,227 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: DMA
+2025-12-29 14:55:01,227 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: STMicroelectronics.X-CUBE-AI.10.2.0
+2025-12-29 14:55:01,228 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-12-29 14:55:01,228 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: ETH
+2025-12-29 14:55:01,232 [INFO] CodeGenerator:892 - code generatio: config db path: /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659//db/
+2025-12-29 14:55:01,263 [INFO] Argument:325 - Argument : hdmavalue: null
+2025-12-29 14:55:01,263 [INFO] Argument:327 - 	 sub Args: 
+2025-12-29 14:55:01,263 [INFO] Argument:325 - Argument : Instancevalue: DMA1_Stream3
+2025-12-29 14:55:01,263 [INFO] Argument:335 - Argument : Instancevalue: DMA1_Stream3
+2025-12-29 14:55:01,263 [INFO] Argument:325 - Argument : Initvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:327 - 	 sub Args: 
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : Channelvalue: DMA_CHANNEL_0
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : Channelvalue: DMA_CHANNEL_0
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_HALFWORD
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_HALFWORD
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_HALFWORD
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_HALFWORD
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : Modevalue: DMA_CIRCULAR
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : Modevalue: DMA_CIRCULAR
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : Priorityvalue: DMA_PRIORITY_HIGH
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : Priorityvalue: DMA_PRIORITY_HIGH
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : FIFOThresholdvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : FIFOThresholdvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : MemBurstvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : MemBurstvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : PeriphBurstvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : PeriphBurstvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : Lockvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : Lockvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : Statevalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : Statevalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : Parentvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : Parentvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : XferCpltCallbackvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : XferCpltCallbackvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : XferHalfCpltCallbackvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:335 - Argument : XferHalfCpltCallbackvalue: null
+2025-12-29 14:55:01,264 [INFO] Argument:325 - Argument : XferM1CpltCallbackvalue: null
+2025-12-29 14:55:01,265 [INFO] Argument:335 - Argument : XferM1CpltCallbackvalue: null
+2025-12-29 14:55:01,265 [INFO] Argument:325 - Argument : XferErrorCallbackvalue: null
+2025-12-29 14:55:01,265 [INFO] Argument:335 - Argument : XferErrorCallbackvalue: null
+2025-12-29 14:55:01,265 [INFO] Argument:325 - Argument : ErrorCodevalue: null
+2025-12-29 14:55:01,265 [INFO] Argument:335 - Argument : ErrorCodevalue: null
+2025-12-29 14:55:01,479 [INFO] IP:3329 - RTE Config file name : RTE_Component
+2025-12-29 14:55:01,480 [INFO] IP:3347 - RTE template : RTE_Components.ftl
+2025-12-29 14:55:01,486 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/license.tmp_save
+2025-12-29 14:55:01,588 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/license.tmp
+2025-12-29 14:55:01,662 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/gpio.tmp_save
+2025-12-29 14:55:01,780 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/gpio.tmp
+2025-12-29 14:55:02,202 [WARN] IPConfigManager:3238 - Warning: the RefConfig PWREx_EnableUSBVoltageDetector is not available in your config.xml file
+2025-12-29 14:55:02,211 [INFO] Middleware:1452 - No code input for Bsp Dependency
+2025-12-29 14:55:02,239 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/dma.tmp_save
+2025-12-29 14:55:02,309 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/dma.tmp
+2025-12-29 14:55:02,311 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/dma_GV.tmp_save
+2025-12-29 14:55:02,380 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/dma_GV.tmp
+2025-12-29 14:55:02,383 [INFO] Middleware:1452 - No code input for Bsp Dependency
+2025-12-29 14:55:02,398 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/stm32f4xx_it.c_save
+2025-12-29 14:55:02,495 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/stm32f4xx_it.c
+2025-12-29 14:55:02,497 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/stm32f4xx_it.h_save
+2025-12-29 14:55:02,566 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/stm32f4xx_it.h
+2025-12-29 14:55:02,577 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/stm32f4xx_hal_msp.c_save
+2025-12-29 14:55:02,695 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/stm32f4xx_hal_msp.c
+2025-12-29 14:55:02,697 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/system.tmp_save
+2025-12-29 14:55:02,771 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/system.tmp
+2025-12-29 14:55:02,777 [INFO] CodeEngine:321 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/stm32f4xx_hal_conf.h_save
+2025-12-29 14:55:02,856 [INFO] CodeEngine:345 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/stm32f4xx_hal_conf.h
+2025-12-29 14:55:02,888 [WARN] IPConfigManager:3811 - IP not found : TIM
+2025-12-29 14:55:02,888 [WARN] IPConfigManager:3811 - IP not found : USB_OTG
+2025-12-29 14:55:02,889 [WARN] CodeGenerator:4259 - IP not found : null
+2025-12-29 14:55:02,889 [WARN] CodeGenerator:4259 - IP not found : null
+2025-12-29 14:55:02,893 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/main.h_save
+2025-12-29 14:55:02,967 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/main.h
+2025-12-29 14:55:02,970 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/main.c_save
+2025-12-29 14:55:03,118 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/main.c
+2025-12-29 14:55:03,513 [INFO] AInterface:322 - ModelName:speechrecog; files:[/home/daniel/Downloads/kws_model.tflite]; type:TFLite; compression:None
+2025-12-29 14:55:03,514 [INFO] AInterface:526 - workspaceTempDir: /tmp/mxAI_workspace52303690907942007787691988908670
+2025-12-29 14:55:03,514 [INFO] AInterface:1176 - Setting Env: /home/daniel/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/Utilities/linux
+2025-12-29 14:55:03,515 [INFO] STM32CubeIDEBuilder:265 - Looking for gnu-tools-for-stm32 tools/bin/arm-none-eabi-gcc in /opt/st/stm32cubeide_1.19.0
+2025-12-29 14:55:03,516 [INFO] STM32CubeIDEBuilder:294 - checking /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/arm-none-eabi-gcc
+2025-12-29 14:55:03,516 [INFO] STM32CubeIDEBuilder:297 - ret=/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/arm-none-eabi-gcc
+2025-12-29 14:55:03,516 [INFO] STM32CubeIDEBuilder:311 - returning /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/arm-none-eabi-gcc
+2025-12-29 14:55:03,516 [INFO] AInterface:1233 - Custom PATH variable: /home/daniel/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/Utilities/linux:/bin:/usr/bin:/usr/sbin:/sbin:/home/daniel/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/Utilities/linux/node/bin:/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin
+2025-12-29 14:55:03,523 [INFO] CmdLine:115 - Command: /home/daniel/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/Utilities/linux/stedgeai generate --target stm32f4 --name speechrecog -m /home/daniel/Downloads/kws_model.tflite --compression none --verbosity 1 --workspace /tmp/mxAI_workspace52303690907942007787691988908670 --output /home/daniel/.stm32cubemx/speechrecog_output
+2025-12-29 14:55:03,525 [INFO] AIModelDetailledView:2380 - Analysis status: pending
+2025-12-29 14:55:04,481 [INFO] CmdLine:76 - ST Edge AI Core v2.2.0-20266 2adc00962
+2025-12-29 14:55:15,810 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:15,811 [INFO] CmdLine:76 - Creating c (debug) info json file /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_c_info.json
+2025-12-29 14:55:15,843 [INFO] CmdLine:76 -  
+2025-12-29 14:55:15,843 [INFO] CmdLine:76 -  Exec/report summary (generate)
+2025-12-29 14:55:15,844 [INFO] CmdLine:76 -  ----------------------------------------------------------------------------------------------
+2025-12-29 14:55:15,844 [INFO] CmdLine:76 -  model file         :   /home/daniel/Downloads/kws_model.tflite                                
+2025-12-29 14:55:15,845 [INFO] CmdLine:76 -  type               :   tflite                                                                 
+2025-12-29 14:55:15,845 [INFO] CmdLine:76 -  c_name             :   speechrecog                                                            
+2025-12-29 14:55:15,845 [INFO] CmdLine:76 -  compression        :   none                                                                   
+2025-12-29 14:55:15,846 [INFO] CmdLine:76 -  options            :   allocate-inputs, allocate-outputs                                      
+2025-12-29 14:55:15,846 [INFO] CmdLine:76 -  optimization       :   balanced                                                               
+2025-12-29 14:55:15,846 [INFO] CmdLine:76 -  target/series      :   stm32f4                                                                
+2025-12-29 14:55:15,846 [INFO] CmdLine:76 -  workspace dir      :   /tmp/mxAI_workspace52303690907942007787691988908670                    
+2025-12-29 14:55:15,847 [INFO] CmdLine:76 -  output dir         :   /home/daniel/.stm32cubemx/speechrecog_output                           
+2025-12-29 14:55:15,847 [INFO] CmdLine:76 -  model_fmt          :   float                                                                  
+2025-12-29 14:55:15,847 [INFO] CmdLine:76 -  model_name         :   kws_model                                                              
+2025-12-29 14:55:15,847 [INFO] CmdLine:76 -  model_hash         :   0x145e677d622573e84a63d70e92de24a5                                     
+2025-12-29 14:55:15,848 [INFO] CmdLine:76 -  params #           :   5,974 items (9.51 KiB)                                                 
+2025-12-29 14:55:15,848 [INFO] CmdLine:76 -  ----------------------------------------------------------------------------------------------
+2025-12-29 14:55:15,848 [INFO] CmdLine:76 -  input 1/1          :   'serving_default_input_10', f32(1x48x10x1), 1.88 KBytes, activations   
+2025-12-29 14:55:15,849 [INFO] CmdLine:76 -  output 1/1         :   'gemm_5', f32(1x30), 120 Bytes, activations                            
+2025-12-29 14:55:15,849 [INFO] CmdLine:76 -  macc               :   251,990                                                                
+2025-12-29 14:55:15,849 [INFO] CmdLine:76 -  weights (ro)       :   23,896 B (23.34 KiB) (1 segment)                                       
+2025-12-29 14:55:15,849 [INFO] CmdLine:76 -  activations (rw)   :   22,560 B (22.03 KiB) (1 segment) *                                     
+2025-12-29 14:55:15,850 [INFO] CmdLine:76 -  ram (total)        :   22,560 B (22.03 KiB) = 22,560 + 0 + 0                                  
+2025-12-29 14:55:15,850 [INFO] CmdLine:76 -  ----------------------------------------------------------------------------------------------
+2025-12-29 14:55:15,850 [INFO] CmdLine:76 -  (*) 'input'/'output' buffers are allocated in the activations buffer
+2025-12-29 14:55:15,861 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:15,862 [INFO] CmdLine:76 - Computing AI RT data/code size (target=stm32f4)..
+2025-12-29 14:55:16,708 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:16,709 [INFO] CmdLine:76 -  Requested memory size by section - "stm32f4" target
+2025-12-29 14:55:16,709 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:16,710 [INFO] CmdLine:76 -  module                             text   rodata    data      bss
+2025-12-29 14:55:16,711 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:16,711 [INFO] CmdLine:76 -  NetworkRuntime1020_CM4_GCC.a     14,080        0       0        0
+2025-12-29 14:55:16,712 [INFO] CmdLine:76 -  speechrecog.o                       624       40   2,204      192
+2025-12-29 14:55:16,712 [INFO] CmdLine:76 -  speechrecog_data.o                   48       16      88        0
+2025-12-29 14:55:16,713 [INFO] CmdLine:76 -  lib (toolchain)*                      0        0       0        0
+2025-12-29 14:55:16,713 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:16,714 [INFO] CmdLine:76 -  RT total**                       14,752       56   2,292      192
+2025-12-29 14:55:16,714 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:16,715 [INFO] CmdLine:76 -  weights                               0   23,896       0        0
+2025-12-29 14:55:16,715 [INFO] CmdLine:76 -  activations                           0        0       0   22,560
+2025-12-29 14:55:16,716 [INFO] CmdLine:76 -  io                                    0        0       0        0
+2025-12-29 14:55:16,717 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:16,717 [INFO] CmdLine:76 -  TOTAL                            14,752   23,952   2,292   22,752
+2025-12-29 14:55:16,718 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:16,719 [INFO] CmdLine:76 -  *  toolchain objects (libm/libgcc*)
+2025-12-29 14:55:16,719 [INFO] CmdLine:76 -  ** RT AI runtime objects (kernels+infrastructure)
+2025-12-29 14:55:16,720 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:16,720 [INFO] CmdLine:76 -   Summary - "stm32f4" target
+2025-12-29 14:55:16,723 [INFO] CmdLine:76 -   --------------------------------------------------
+2025-12-29 14:55:16,723 [INFO] CmdLine:76 -                FLASH (ro)      %*   RAM (rw)      %
+2025-12-29 14:55:16,724 [INFO] CmdLine:76 -   --------------------------------------------------
+2025-12-29 14:55:16,724 [INFO] CmdLine:76 -   RT total         17,100   41.7%      2,484   9.9%
+2025-12-29 14:55:16,725 [INFO] CmdLine:76 -   --------------------------------------------------
+2025-12-29 14:55:16,725 [INFO] CmdLine:76 -   TOTAL            40,996             25,044
+2025-12-29 14:55:16,726 [INFO] CmdLine:76 -   --------------------------------------------------
+2025-12-29 14:55:16,726 [INFO] CmdLine:76 -   *  rt/total
+2025-12-29 14:55:16,727 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:16,728 [INFO] CmdLine:76 -  Generated files (7)
+2025-12-29 14:55:16,729 [INFO] CmdLine:76 -  ------------------------------------------------------------------------
+2025-12-29 14:55:16,730 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_data_params.h
+2025-12-29 14:55:16,730 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_data_params.c
+2025-12-29 14:55:16,731 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_data.h
+2025-12-29 14:55:16,731 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_data.c
+2025-12-29 14:55:16,731 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_config.h
+2025-12-29 14:55:16,732 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog.h
+2025-12-29 14:55:16,732 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog.c
+2025-12-29 14:55:16,733 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:16,733 [INFO] CmdLine:76 - Creating txt report file /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_generate_report.txt
+2025-12-29 14:55:19,637 [INFO] CmdLine:76 - elapsed time (generate): 15.156s
+2025-12-29 14:55:20,363 [INFO] CmdLine:148 - stedgeai exit with status: 0
+2025-12-29 14:55:20,370 [INFO] AIModelDetailledView:2380 - Analysis status: done
+2025-12-29 14:55:20,665 [INFO] ProjectBuilder:3606 - Time for Copy HAL[1] : 51mS.
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,665 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,666 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,667 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,667 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,667 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,667 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,667 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,667 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:20,671 [INFO] ProjectBuilder:5216 - Project Generator version: 4.7.0-B52
+2025-12-29 14:55:20,795 [INFO] ConfigFileManager:1595 - The Die is : DIE419
+2025-12-29 14:55:22,173 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 1502mS.
+2025-12-29 14:55:22,175 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 1mS.
+2025-12-29 14:55:22,175 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-12-29 14:55:26,125 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 798720808 Bytes (1073741824)
+2025-12-29 14:55:28,233 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 836469544 Bytes (1073741824)
+2025-12-29 14:55:30,031 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 420276536 Bytes (1073741824)
+2025-12-29 14:55:30,424 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: TIM1_8
+2025-12-29 14:55:30,425 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: I2S
+2025-12-29 14:55:30,425 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-12-29 14:55:30,425 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: ADC
+2025-12-29 14:55:30,425 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-12-29 14:55:30,425 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USB_OTG_FS
+2025-12-29 14:55:30,425 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-12-29 14:55:30,425 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USART
+2025-12-29 14:55:30,425 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: DMA
+2025-12-29 14:55:30,425 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: STMicroelectronics.X-CUBE-AI.10.2.0
+2025-12-29 14:55:30,426 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-12-29 14:55:30,426 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: ETH
+2025-12-29 14:55:30,429 [INFO] CodeGenerator:892 - code generatio: config db path: /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659//db/
+2025-12-29 14:55:30,479 [INFO] Argument:325 - Argument : hdmavalue: null
+2025-12-29 14:55:30,479 [INFO] Argument:327 - 	 sub Args: 
+2025-12-29 14:55:30,479 [INFO] Argument:325 - Argument : Instancevalue: DMA1_Stream3
+2025-12-29 14:55:30,482 [INFO] Argument:335 - Argument : Instancevalue: DMA1_Stream3
+2025-12-29 14:55:30,482 [INFO] Argument:325 - Argument : Initvalue: null
+2025-12-29 14:55:30,482 [INFO] Argument:327 - 	 sub Args: 
+2025-12-29 14:55:30,482 [INFO] Argument:325 - Argument : Channelvalue: DMA_CHANNEL_0
+2025-12-29 14:55:30,482 [INFO] Argument:335 - Argument : Channelvalue: DMA_CHANNEL_0
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_HALFWORD
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_HALFWORD
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_HALFWORD
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_HALFWORD
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : Modevalue: DMA_CIRCULAR
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : Modevalue: DMA_CIRCULAR
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : Priorityvalue: DMA_PRIORITY_HIGH
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : Priorityvalue: DMA_PRIORITY_HIGH
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : FIFOModevalue: DMA_FIFOMODE_DISABLE
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : FIFOThresholdvalue: null
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : FIFOThresholdvalue: null
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : MemBurstvalue: null
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : MemBurstvalue: null
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : PeriphBurstvalue: null
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : PeriphBurstvalue: null
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : Lockvalue: null
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : Lockvalue: null
+2025-12-29 14:55:30,483 [INFO] Argument:325 - Argument : Statevalue: null
+2025-12-29 14:55:30,483 [INFO] Argument:335 - Argument : Statevalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:325 - Argument : Parentvalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:335 - Argument : Parentvalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:325 - Argument : XferCpltCallbackvalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:335 - Argument : XferCpltCallbackvalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:325 - Argument : XferHalfCpltCallbackvalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:335 - Argument : XferHalfCpltCallbackvalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:325 - Argument : XferM1CpltCallbackvalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:335 - Argument : XferM1CpltCallbackvalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:325 - Argument : XferErrorCallbackvalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:335 - Argument : XferErrorCallbackvalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:325 - Argument : ErrorCodevalue: null
+2025-12-29 14:55:30,484 [INFO] Argument:335 - Argument : ErrorCodevalue: null
+2025-12-29 14:55:30,757 [INFO] IP:3329 - RTE Config file name : RTE_Component
+2025-12-29 14:55:30,757 [INFO] IP:3347 - RTE template : RTE_Components.ftl
+2025-12-29 14:55:30,761 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/license.tmp_save
+2025-12-29 14:55:30,906 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/license.tmp
+2025-12-29 14:55:30,973 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/gpio.tmp_save
+2025-12-29 14:55:31,099 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/gpio.tmp
+2025-12-29 14:55:31,660 [WARN] IPConfigManager:3238 - Warning: the RefConfig PWREx_EnableUSBVoltageDetector is not available in your config.xml file
+2025-12-29 14:55:31,669 [INFO] Middleware:1452 - No code input for Bsp Dependency
+2025-12-29 14:55:31,693 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/dma.tmp_save
+2025-12-29 14:55:31,763 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/dma.tmp
+2025-12-29 14:55:31,764 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/dma_GV.tmp_save
+2025-12-29 14:55:31,830 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/dma_GV.tmp
+2025-12-29 14:55:31,832 [INFO] Middleware:1452 - No code input for Bsp Dependency
+2025-12-29 14:55:31,845 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/stm32f4xx_it.c_save
+2025-12-29 14:55:31,924 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/stm32f4xx_it.c
+2025-12-29 14:55:31,926 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/stm32f4xx_it.h_save
+2025-12-29 14:55:31,995 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/stm32f4xx_it.h
+2025-12-29 14:55:32,004 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/stm32f4xx_hal_msp.c_save
+2025-12-29 14:55:32,119 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/stm32f4xx_hal_msp.c
+2025-12-29 14:55:32,121 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/system.tmp_save
+2025-12-29 14:55:32,189 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/MXTmpFiles/system.tmp
+2025-12-29 14:55:32,195 [INFO] CodeEngine:321 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/stm32f4xx_hal_conf.h_save
+2025-12-29 14:55:32,278 [INFO] CodeEngine:345 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/stm32f4xx_hal_conf.h
+2025-12-29 14:55:32,300 [WARN] IPConfigManager:3811 - IP not found : TIM
+2025-12-29 14:55:32,300 [WARN] IPConfigManager:3811 - IP not found : USB_OTG
+2025-12-29 14:55:32,300 [WARN] CodeGenerator:4259 - IP not found : null
+2025-12-29 14:55:32,301 [WARN] CodeGenerator:4259 - IP not found : null
+2025-12-29 14:55:32,304 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/main.h_save
+2025-12-29 14:55:32,382 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Inc/main.h
+2025-12-29 14:55:32,383 [INFO] CodeEngine:265 - oldGeneratedFile, /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/main.c_save
+2025-12-29 14:55:32,559 [INFO] CodeEngine:289 - Generated code: /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/Core/Src/main.c
+2025-12-29 14:55:32,760 [INFO] AInterface:322 - ModelName:speechrecog; files:[/home/daniel/Downloads/kws_model.tflite]; type:TFLite; compression:None
+2025-12-29 14:55:32,761 [INFO] AInterface:526 - workspaceTempDir: /tmp/mxAI_workspace5259616269549782921867380348065
+2025-12-29 14:55:32,761 [INFO] AInterface:1176 - Setting Env: /home/daniel/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/Utilities/linux
+2025-12-29 14:55:32,761 [INFO] STM32CubeIDEBuilder:265 - Looking for gnu-tools-for-stm32 tools/bin/arm-none-eabi-gcc in /opt/st/stm32cubeide_1.19.0
+2025-12-29 14:55:32,762 [INFO] STM32CubeIDEBuilder:294 - checking /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/arm-none-eabi-gcc
+2025-12-29 14:55:32,762 [INFO] STM32CubeIDEBuilder:297 - ret=/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/arm-none-eabi-gcc
+2025-12-29 14:55:32,762 [INFO] STM32CubeIDEBuilder:311 - returning /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin/arm-none-eabi-gcc
+2025-12-29 14:55:32,762 [INFO] AInterface:1233 - Custom PATH variable: /home/daniel/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/Utilities/linux:/bin:/usr/bin:/usr/sbin:/sbin:/home/daniel/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/Utilities/linux/node/bin:/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/bin
+2025-12-29 14:55:32,767 [INFO] CmdLine:115 - Command: /home/daniel/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/Utilities/linux/stedgeai generate --target stm32f4 --name speechrecog -m /home/daniel/Downloads/kws_model.tflite --compression none --verbosity 1 --workspace /tmp/mxAI_workspace5259616269549782921867380348065 --output /home/daniel/.stm32cubemx/speechrecog_output
+2025-12-29 14:55:32,767 [INFO] AIModelDetailledView:2380 - Analysis status: pending
+2025-12-29 14:55:33,308 [INFO] CmdLine:76 - ST Edge AI Core v2.2.0-20266 2adc00962
+2025-12-29 14:55:38,574 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:38,575 [INFO] CmdLine:76 - Creating c (debug) info json file /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_c_info.json
+2025-12-29 14:55:38,605 [INFO] CmdLine:76 -  
+2025-12-29 14:55:38,606 [INFO] CmdLine:76 -  Exec/report summary (generate)
+2025-12-29 14:55:38,607 [INFO] CmdLine:76 -  ----------------------------------------------------------------------------------------------
+2025-12-29 14:55:38,607 [INFO] CmdLine:76 -  model file         :   /home/daniel/Downloads/kws_model.tflite                                
+2025-12-29 14:55:38,608 [INFO] CmdLine:76 -  type               :   tflite                                                                 
+2025-12-29 14:55:38,608 [INFO] CmdLine:76 -  c_name             :   speechrecog                                                            
+2025-12-29 14:55:38,608 [INFO] CmdLine:76 -  compression        :   none                                                                   
+2025-12-29 14:55:38,608 [INFO] CmdLine:76 -  options            :   allocate-inputs, allocate-outputs                                      
+2025-12-29 14:55:38,608 [INFO] CmdLine:76 -  optimization       :   balanced                                                               
+2025-12-29 14:55:38,609 [INFO] CmdLine:76 -  target/series      :   stm32f4                                                                
+2025-12-29 14:55:38,609 [INFO] CmdLine:76 -  workspace dir      :   /tmp/mxAI_workspace5259616269549782921867380348065                     
+2025-12-29 14:55:38,610 [INFO] CmdLine:76 -  output dir         :   /home/daniel/.stm32cubemx/speechrecog_output                           
+2025-12-29 14:55:38,610 [INFO] CmdLine:76 -  model_fmt          :   float                                                                  
+2025-12-29 14:55:38,610 [INFO] CmdLine:76 -  model_name         :   kws_model                                                              
+2025-12-29 14:55:38,610 [INFO] CmdLine:76 -  model_hash         :   0x145e677d622573e84a63d70e92de24a5                                     
+2025-12-29 14:55:38,611 [INFO] CmdLine:76 -  params #           :   5,974 items (9.51 KiB)                                                 
+2025-12-29 14:55:38,611 [INFO] CmdLine:76 -  ----------------------------------------------------------------------------------------------
+2025-12-29 14:55:38,611 [INFO] CmdLine:76 -  input 1/1          :   'serving_default_input_10', f32(1x48x10x1), 1.88 KBytes, activations   
+2025-12-29 14:55:38,611 [INFO] CmdLine:76 -  output 1/1         :   'gemm_5', f32(1x30), 120 Bytes, activations                            
+2025-12-29 14:55:38,611 [INFO] CmdLine:76 -  macc               :   251,990                                                                
+2025-12-29 14:55:38,611 [INFO] CmdLine:76 -  weights (ro)       :   23,896 B (23.34 KiB) (1 segment)                                       
+2025-12-29 14:55:38,612 [INFO] CmdLine:76 -  activations (rw)   :   22,560 B (22.03 KiB) (1 segment) *                                     
+2025-12-29 14:55:38,612 [INFO] CmdLine:76 -  ram (total)        :   22,560 B (22.03 KiB) = 22,560 + 0 + 0                                  
+2025-12-29 14:55:38,612 [INFO] CmdLine:76 -  ----------------------------------------------------------------------------------------------
+2025-12-29 14:55:38,612 [INFO] CmdLine:76 -  (*) 'input'/'output' buffers are allocated in the activations buffer
+2025-12-29 14:55:38,618 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:38,619 [INFO] CmdLine:76 - Computing AI RT data/code size (target=stm32f4)..
+2025-12-29 14:55:39,414 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:39,415 [INFO] CmdLine:76 -  Requested memory size by section - "stm32f4" target
+2025-12-29 14:55:39,416 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:39,416 [INFO] CmdLine:76 -  module                             text   rodata    data      bss
+2025-12-29 14:55:39,417 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:39,417 [INFO] CmdLine:76 -  NetworkRuntime1020_CM4_GCC.a     14,080        0       0        0
+2025-12-29 14:55:39,418 [INFO] CmdLine:76 -  speechrecog.o                       624       40   2,204      192
+2025-12-29 14:55:39,418 [INFO] CmdLine:76 -  speechrecog_data.o                   48       16      88        0
+2025-12-29 14:55:39,419 [INFO] CmdLine:76 -  lib (toolchain)*                      0        0       0        0
+2025-12-29 14:55:39,420 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:39,420 [INFO] CmdLine:76 -  RT total**                       14,752       56   2,292      192
+2025-12-29 14:55:39,421 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:39,421 [INFO] CmdLine:76 -  weights                               0   23,896       0        0
+2025-12-29 14:55:39,422 [INFO] CmdLine:76 -  activations                           0        0       0   22,560
+2025-12-29 14:55:39,423 [INFO] CmdLine:76 -  io                                    0        0       0        0
+2025-12-29 14:55:39,424 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:39,425 [INFO] CmdLine:76 -  TOTAL                            14,752   23,952   2,292   22,752
+2025-12-29 14:55:39,425 [INFO] CmdLine:76 -  ------------------------------ -------- -------- ------- --------
+2025-12-29 14:55:39,427 [INFO] CmdLine:76 -  *  toolchain objects (libm/libgcc*)
+2025-12-29 14:55:39,430 [INFO] CmdLine:76 -  ** RT AI runtime objects (kernels+infrastructure)
+2025-12-29 14:55:39,430 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:39,431 [INFO] CmdLine:76 -   Summary - "stm32f4" target
+2025-12-29 14:55:39,431 [INFO] CmdLine:76 -   --------------------------------------------------
+2025-12-29 14:55:39,432 [INFO] CmdLine:76 -                FLASH (ro)      %*   RAM (rw)      %
+2025-12-29 14:55:39,433 [INFO] CmdLine:76 -   --------------------------------------------------
+2025-12-29 14:55:39,433 [INFO] CmdLine:76 -   RT total         17,100   41.7%      2,484   9.9%
+2025-12-29 14:55:39,433 [INFO] CmdLine:76 -   --------------------------------------------------
+2025-12-29 14:55:39,434 [INFO] CmdLine:76 -   TOTAL            40,996             25,044
+2025-12-29 14:55:39,434 [INFO] CmdLine:76 -   --------------------------------------------------
+2025-12-29 14:55:39,434 [INFO] CmdLine:76 -   *  rt/total
+2025-12-29 14:55:39,435 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:39,435 [INFO] CmdLine:76 -  Generated files (7)
+2025-12-29 14:55:39,436 [INFO] CmdLine:76 -  ------------------------------------------------------------------------
+2025-12-29 14:55:39,436 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_data_params.h
+2025-12-29 14:55:39,436 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_data_params.c
+2025-12-29 14:55:39,437 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_data.h
+2025-12-29 14:55:39,437 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_data.c
+2025-12-29 14:55:39,438 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_config.h
+2025-12-29 14:55:39,438 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog.h
+2025-12-29 14:55:39,439 [INFO] CmdLine:76 -  /home/daniel/.stm32cubemx/speechrecog_output/speechrecog.c
+2025-12-29 14:55:39,440 [INFO] CmdLine:76 -                                                        
+2025-12-29 14:55:39,441 [INFO] CmdLine:76 - Creating txt report file /home/daniel/.stm32cubemx/speechrecog_output/speechrecog_generate_report.txt
+2025-12-29 14:55:42,234 [INFO] CmdLine:76 - elapsed time (generate): 8.926s
+2025-12-29 14:55:42,954 [INFO] CmdLine:148 - stedgeai exit with status: 0
+2025-12-29 14:55:42,959 [INFO] AIModelDetailledView:2380 - Analysis status: done
+2025-12-29 14:55:43,208 [INFO] ProjectBuilder:3606 - Time for Copy HAL[1] : 30mS.
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,209 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,210 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,211 [ERROR] Middleware:2950 - Invalid RefComponent list
+2025-12-29 14:55:43,213 [INFO] ProjectBuilder:5216 - Project Generator version: 4.7.0-B52
+2025-12-29 14:55:43,341 [INFO] ConfigFileManager:1595 - The Die is : DIE419
+2025-12-29 14:55:44,603 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 1389mS.
+2025-12-29 14:55:44,603 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-12-29 14:55:44,604 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-12-29 14:55:52,346 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 955396960 Bytes (1073741824)
