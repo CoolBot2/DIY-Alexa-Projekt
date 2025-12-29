@@ -5,16 +5,25 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../X-CUBE-AI/App/network.c \
+../X-CUBE-AI/App/network_data.c \
+../X-CUBE-AI/App/network_data_params.c \
 ../X-CUBE-AI/App/speechrecog.c \
 ../X-CUBE-AI/App/speechrecog_data.c \
 ../X-CUBE-AI/App/speechrecog_data_params.c 
 
 C_DEPS += \
+./X-CUBE-AI/App/network.d \
+./X-CUBE-AI/App/network_data.d \
+./X-CUBE-AI/App/network_data_params.d \
 ./X-CUBE-AI/App/speechrecog.d \
 ./X-CUBE-AI/App/speechrecog_data.d \
 ./X-CUBE-AI/App/speechrecog_data_params.d 
 
 OBJS += \
+./X-CUBE-AI/App/network.o \
+./X-CUBE-AI/App/network_data.o \
+./X-CUBE-AI/App/network_data_params.o \
 ./X-CUBE-AI/App/speechrecog.o \
 ./X-CUBE-AI/App/speechrecog_data.o \
 ./X-CUBE-AI/App/speechrecog_data_params.o 
@@ -27,7 +36,7 @@ X-CUBE-AI/App/%.o X-CUBE-AI/App/%.su X-CUBE-AI/App/%.cyclo: ../X-CUBE-AI/App/%.c
 clean: clean-X-2d-CUBE-2d-AI-2f-App
 
 clean-X-2d-CUBE-2d-AI-2f-App:
-	-$(RM) ./X-CUBE-AI/App/speechrecog.cyclo ./X-CUBE-AI/App/speechrecog.d ./X-CUBE-AI/App/speechrecog.o ./X-CUBE-AI/App/speechrecog.su ./X-CUBE-AI/App/speechrecog_data.cyclo ./X-CUBE-AI/App/speechrecog_data.d ./X-CUBE-AI/App/speechrecog_data.o ./X-CUBE-AI/App/speechrecog_data.su ./X-CUBE-AI/App/speechrecog_data_params.cyclo ./X-CUBE-AI/App/speechrecog_data_params.d ./X-CUBE-AI/App/speechrecog_data_params.o ./X-CUBE-AI/App/speechrecog_data_params.su
+	-$(RM) ./X-CUBE-AI/App/network.cyclo ./X-CUBE-AI/App/network.d ./X-CUBE-AI/App/network.o ./X-CUBE-AI/App/network.su ./X-CUBE-AI/App/network_data.cyclo ./X-CUBE-AI/App/network_data.d ./X-CUBE-AI/App/network_data.o ./X-CUBE-AI/App/network_data.su ./X-CUBE-AI/App/network_data_params.cyclo ./X-CUBE-AI/App/network_data_params.d ./X-CUBE-AI/App/network_data_params.o ./X-CUBE-AI/App/network_data_params.su ./X-CUBE-AI/App/speechrecog.cyclo ./X-CUBE-AI/App/speechrecog.d ./X-CUBE-AI/App/speechrecog.o ./X-CUBE-AI/App/speechrecog.su ./X-CUBE-AI/App/speechrecog_data.cyclo ./X-CUBE-AI/App/speechrecog_data.d ./X-CUBE-AI/App/speechrecog_data.o ./X-CUBE-AI/App/speechrecog_data.su ./X-CUBE-AI/App/speechrecog_data_params.cyclo ./X-CUBE-AI/App/speechrecog_data_params.d ./X-CUBE-AI/App/speechrecog_data_params.o ./X-CUBE-AI/App/speechrecog_data_params.su
 
 .PHONY: clean-X-2d-CUBE-2d-AI-2f-App
 

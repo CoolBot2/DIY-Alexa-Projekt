@@ -27,17 +27,23 @@
 #include <iostream>
 #include "LEDArray.h"
 #include "funkSteckdose.h"
+#include "mfcc.h"
+#include "kws.h"
 #include <limits>
 #include "arm_math.h"
 
 
 const int I2S_BUF_SIZE = 1000;
-
+#define MFCC_IN_SIZE 800
+#define MFCC_STEP_SIZE 320
+#define MFCC_OUT_SIZE 10
 volatile uint8_t audioReady = 0;
 volatile uint8_t audioHalf = 0;
 volatile uint8_t isRecording=0;
 volatile uint8_t isFinished=0;
 volatile uint16_t recordIndex=0;
+
+float mfccOut[MFCC_OUT_SIZE]; // result after typecast
 uint16_t inputBuffer[I2S_BUF_SIZE*2]; // merge 2 consecutive values
 int32_t mergedFrame[I2S_BUF_SIZE/4]; // Why divide by 4?
 int32_t testbuffer[16000];
@@ -50,6 +56,8 @@ uint16_t pins[]={
 
 };
 LEDArray bar(GPIOB,pins,10);
+MFCC* mfcc = new MFCC(MFCC_OUT_SIZE, MFCC_IN_SIZE, 2);
+KWS* kws=new KWS();
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -174,16 +182,47 @@ void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s){
 	}
 	//value = HAL_GetTick();
 }
+
+void extract_features(){
+
+
+	//filling of mMFCC
+
+	float mfccInputFrame[MFCC_IN_SIZE]; // input frame of mfcc
+	q7_t mfccOutTmp[MFCC_OUT_SIZE]; // result of mfcc
+	int feature_counter = 0;
+	for (int i = 0; i < 16000-MFCC_STEP_SIZE; i+=MFCC_STEP_SIZE,
+	feature_counter++) {
+	for (int j = 0; j < MFCC_IN_SIZE; j++) {
+	if (i+j >= 16000)
+	mfccInputFrame[j] = 0;
+	else {
+	mfccInputFrame[j] = (float) testbuffer[i+j];
+	//printf("%f, ", mfccInputFrame[j]);
+	}
+	}
+	mfcc->mfcc_compute(mfccInputFrame, mfccOutTmp);
+
+	for (int k = 0; k < MFCC_OUT_SIZE; k++) {
+
+	kws->mMFCC[feature_counter][k] = (ai_float) mfccOutTmp[k];// !!!! PREPARE MFCC VALUES AS INPUT FOR NN
+	}
+	}
+
+
+	//neural network
+
+	int wordIndex=kws->runInference(1);
+	std::string Word=kws->indexToWord(wordIndex);
+	printf("Ergebnis wort: %s \r\n",Word.c_str()); //cant use normal cpp strings in c so (to_cstr)
+
+}
 /* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
   * @retval int
   */
-void test_fft_link(void){
-	arm_rfft_fast_instance_f32 S;
-	arm_rfft_fast_init_f32(&S, 256);
-}
 int main(void)
 {
 
@@ -285,6 +324,9 @@ if(!isRecording && peak == 50000){
 		   duration = HAL_GetTick()-recordStart;
 		   snprintf(msg, sizeof(msg), "duration: %ld \r\n", duration);
 		   	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+		   	  printf("Feature extraction started\r\n");
+		   	  extract_features();
+		   	  printf("Feature extraction ended\r\n");
 	  }
 
 	  if (peak >10000 ) {
