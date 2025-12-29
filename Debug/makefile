@@ -9,6 +9,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include X-CUBE-AI/App/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
@@ -84,8 +85,8 @@ all: main-build
 main-build: DIY_Alexa_Projekt.elf secondary-outputs
 
 # Tool invocations
-DIY_Alexa_Projekt.elf DIY_Alexa_Projekt.map: $(OBJS) $(USER_OBJS) /home/daniel/STM32CubeIDE/workspace_1.19.0/DIY_Alexa_Projekt/STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "DIY_Alexa_Projekt.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/daniel/STM32CubeIDE/workspace_1.19.0/DIY_Alexa_Projekt/STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DIY_Alexa_Projekt.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+DIY_Alexa_Projekt.elf DIY_Alexa_Projekt.map: $(OBJS) $(USER_OBJS) /home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "DIY_Alexa_Projekt.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/daniel/STM32CubeIDE/workspace_alexa/DIY_Alexa_Projekt/STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DIY_Alexa_Projekt.map" -Wl,--gc-sections -static -L../Middlewares/ST/AI/Lib -L../Drivers/CMSIS/Lib/GCC --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

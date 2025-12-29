@@ -28,6 +28,7 @@
 #include "LEDArray.h"
 #include "funkSteckdose.h"
 #include <limits>
+#include "arm_math.h"
 
 
 const int I2S_BUF_SIZE = 1000;
@@ -179,6 +180,10 @@ void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s){
   * @brief  The application entry point.
   * @retval int
   */
+void test_fft_link(void){
+	arm_rfft_fast_instance_f32 S;
+	arm_rfft_fast_init_f32(&S, 256);
+}
 int main(void)
 {
 
@@ -240,7 +245,6 @@ int main(void)
 	  int32_t minVal =  std::numeric_limits<int>::max();
 	  int32_t maxVal = std::numeric_limits<int>::min();
 	  int32_t peak;
-
 	  for (int i = 0; i < I2S_BUF_SIZE/4; ++i)
 	  {
 	      int32_t v = mergedFrame[i];
@@ -712,7 +716,21 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+int __io_putchar(int ch)
+{
+uint8_t c[1];
+c[0] = ch & 0x00FF;
+HAL_UART_Transmit(&huart3, &*c, 1, 10);
+return ch;
+}
+int _write(int file, char *ptr, int len){
+	int DataIdx;
+	for(DataIdx = 0; DataIdx < len; DataIdx++)
+	{
+	__io_putchar(*ptr++);
+	}
+	return len;
+	}
 /* USER CODE END 4 */
 
 /**
