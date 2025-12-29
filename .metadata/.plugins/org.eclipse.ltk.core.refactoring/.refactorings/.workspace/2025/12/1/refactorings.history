@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;DIY_ALEX&apos; to &apos;DIY_Alexa_Projekt&apos;" description="Rename resource &apos;DIY_ALEX&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/DIY_ALEX" name="DIY_Alexa_Projekt" stamp="1767013643603" updateReferences="true"/>&#x0A;<refactoring comment="Delete resource &apos;DIY_Alexa_Projekt/Core/Src/main.c&apos;" deleteContents="false" description="Delete resource &apos;DIY_Alexa_Projekt/Core/Src/main.c&apos;" element1="/DIY_Alexa_Projekt/Core/Src/main.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1767014022575"/>
+</session>
