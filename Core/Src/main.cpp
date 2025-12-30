@@ -34,19 +34,24 @@
 
 
 const int I2S_BUF_SIZE = 1000;
+const int totalBuffer = 16000;
 #define MFCC_IN_SIZE 800
 #define MFCC_STEP_SIZE 320
 #define MFCC_OUT_SIZE 10
+#define PRERECORD 4000
+
 volatile uint8_t audioReady = 0;
 volatile uint8_t audioHalf = 0;
 volatile uint8_t isRecording=0;
 volatile uint8_t isFinished=0;
 volatile uint16_t recordIndex=0;
+volatile uint16_t preBufferIndex=0;
 
 float mfccOut[MFCC_OUT_SIZE]; // result after typecast
 uint16_t inputBuffer[I2S_BUF_SIZE*2]; // merge 2 consecutive values
 int32_t mergedFrame[I2S_BUF_SIZE/4]; // Why divide by 4?
-int32_t testbuffer[16000];
+int32_t testbuffer[totalBuffer];
+int32_t preBuffer[PRERECORD];
 int recordStart;
 int duration;
 int value;
@@ -152,6 +157,12 @@ void processHalfBuffer(uint16_t* buf)
         int32_t pcm = temp >> 14;
 
         mergedFrame[i] = pcm; // oder mergedFrame[offset + i] bei Streaming
+        //prebuffer wird immer aufgenommen (kein uberschreitung nötig)
+        preBuffer[preBufferIndex] = pcm;
+        preBufferIndex++;
+        if (preBufferIndex >= 4000) {
+            preBufferIndex = 0;
+        }
         if (isRecording && recordIndex < 16000) {
         	testbuffer[recordIndex++] = pcm;
 
@@ -183,7 +194,7 @@ void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s){
 	//value = HAL_GetTick();
 }
 
-void extract_features(){
+std::string extract_features(){
 
 
 	//filling of mMFCC
@@ -216,6 +227,8 @@ void extract_features(){
 	std::string Word=kws->indexToWord(wordIndex);
 	printf("Ergebnis wort: %s \r\n",Word.c_str()); //cant use normal cpp strings in c so (to_cstr)
 
+
+	return Word;
 }
 /* USER CODE END 0 */
 
@@ -300,7 +313,7 @@ int main(void)
 
 	  if (peak > 50000) {
 		  peak = 50000;
-	  SteckdoseEin();
+
 
 	  } //can be optimized
 
@@ -317,6 +330,16 @@ if(!isRecording && peak == 50000){
 		  snprintf(msg, sizeof(msg), "aufnahme begiinnt...%d",1);
 
 		 	  HAL_UART_Transmit(&huart3,(uint8_t*)msg , strlen(msg), HAL_MAX_DELAY);
+		 	  uint16_t lastSample=preBufferIndex; //3998,3999,0,1,2....3997 (last 4000)
+		 	  for(int i=0; i<PRERECORD;i++){
+		 		  testbuffer[i]=preBuffer[lastSample];
+		 		  lastSample++;
+		 		  if(lastSample>=PRERECORD){
+		 			  lastSample=0;
+		 		  }
+		 	  }
+		 	  recordIndex=PRERECORD;
+
 }
 //hrrhrhhr
 	  if(isFinished){
@@ -325,21 +348,16 @@ if(!isRecording && peak == 50000){
 		   snprintf(msg, sizeof(msg), "duration: %ld \r\n", duration);
 		   	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
 		   	  printf("Feature extraction started\r\n");
-		   	  extract_features();
+		   	  std::string word=extract_features();
 		   	  printf("Feature extraction ended\r\n");
+		   	  if(word =="ON"){
+		   		SteckdoseEin();
+		   	  }
+		   	  else if(word=="OFF"){
+		   		  SteckdoseAus();
+		   	  }
 	  }
 
-	  if (peak >10000 ) {
-	  snprintf(msg, sizeof(msg), "pcm: pk=%ld \r\n", peak);
-	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-
-	  }
-
-
-
-
-
-	  //testLEDBarWithPot();
 
 
 
@@ -348,22 +366,7 @@ if(!isRecording && peak == 50000){
 
 
 
-	  //HAL_Delay(100);
-//	  testLEDBarWithPot();
-//	  if(audioHalf){
-//
-//	  sprintf(msg,"%3u \r \n",(int)1111);
-//	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-//	  }
-//	  if(audioReady){
-//
-//		  sprintf(msg,"%3u \r \n",(int)2222);
-//		  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-//		  }
-//	  snprintf(msg, sizeof(msg), "min = %d, max = %d\r\n", minVal, maxVal);
-//	      HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-//
-//	      HAL_Delay(500);
+
 
     /* USER CODE END WHILE */
 
