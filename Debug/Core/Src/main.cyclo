@@ -1,27 +1,30 @@
+/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/arm-none-eabi/include/c++/13.3.1/bits/char_traits.h:374:7:static int std::char_traits<char>::compare(const char_type*, const char_type*, std::size_t)	2
+/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/arm-none-eabi/include/c++/13.3.1/bits/char_traits.h:393:7:static std::size_t std::char_traits<char>::length(const char_type*)	1
 /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/arm-none-eabi/include/c++/13.3.1/arm-none-eabi/thumb/v7e-m+fp/hard/bits/gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	1
-../Core/Src/main.cpp:118:6:void testLEDBarWithPot()	1
-../Core/Src/main.cpp:132:6:void SteckdoseEin()	1
-../Core/Src/main.cpp:137:6:void SteckdoseAus()	1
-../Core/Src/main.cpp:144:6:void processHalfBuffer(uint16_t*)	6
-../Core/Src/main.cpp:168:6:void HAL_I2S_RxHalfCpltCallback(I2S_HandleTypeDef*)	2
-../Core/Src/main.cpp:177:6:void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef*)	2
-../Core/Src/main.cpp:186:6:void extract_features()	5
-../Core/Src/main.cpp:224:5:int main()	15
-../Core/Src/main.cpp:377:6:void SystemClock_Config()	3
-../Core/Src/main.cpp:423:13:void MX_ADC1_Init()	3
-../Core/Src/main.cpp:475:13:void MX_ETH_Init()	2
-../Core/Src/main.cpp:524:13:void MX_I2S2_Init()	2
-../Core/Src/main.cpp:558:13:void MX_TIM2_Init()	4
-../Core/Src/main.cpp:603:13:void MX_USART3_UART_Init()	2
-../Core/Src/main.cpp:636:13:void MX_USB_OTG_FS_PCD_Init()	2
-../Core/Src/main.cpp:669:13:void MX_DMA_Init()	1
-../Core/Src/main.cpp:687:13:void MX_GPIO_Init()	1
-../Core/Src/main.cpp:759:5:int __io_putchar(int)	1
-../Core/Src/main.cpp:766:5:int _write(int, char*, int)	2
-../Core/Src/main.cpp:780:6:void Error_Handler()	1
+../Core/Src/main.cpp:123:6:void testLEDBarWithPot()	1
+../Core/Src/main.cpp:137:6:void SteckdoseEin()	1
+../Core/Src/main.cpp:142:6:void SteckdoseAus()	1
+../Core/Src/main.cpp:149:6:void processHalfBuffer(uint16_t*)	7
+../Core/Src/main.cpp:179:6:void HAL_I2S_RxHalfCpltCallback(I2S_HandleTypeDef*)	2
+../Core/Src/main.cpp:188:6:void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef*)	2
+../Core/Src/main.cpp:197:13:std::string extract_features()	5
+../Core/Src/main.cpp:239:5:int main()	18
+../Core/Src/main.cpp:382:6:void SystemClock_Config()	3
+../Core/Src/main.cpp:428:13:void MX_ADC1_Init()	3
+../Core/Src/main.cpp:480:13:void MX_ETH_Init()	2
+../Core/Src/main.cpp:529:13:void MX_I2S2_Init()	2
+../Core/Src/main.cpp:563:13:void MX_TIM2_Init()	4
+../Core/Src/main.cpp:608:13:void MX_USART3_UART_Init()	2
+../Core/Src/main.cpp:641:13:void MX_USB_OTG_FS_PCD_Init()	2
+../Core/Src/main.cpp:674:13:void MX_DMA_Init()	1
+../Core/Src/main.cpp:692:13:void MX_GPIO_Init()	1
+../Core/Src/main.cpp:764:5:int __io_putchar(int)	1
+../Core/Src/main.cpp:771:5:int _write(int, char*, int)	2
+../Core/Src/main.cpp:785:6:void Error_Handler()	1
 /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/arm-none-eabi/include/c++/13.3.1/cmath:2494:5:constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::round(_Tp) [with _Tp = int]	1
 /opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/arm-none-eabi/include/c++/13.3.1/cmath:2494:5:constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::round(_Tp) [with _Tp = long int]	1
-../Core/Src/main.cpp:789:1:void __static_initialization_and_destruction_0()	1
-../Core/Src/main.cpp:789:1:void __static_initialization_and_destruction_1()	1
-../Core/Src/main.cpp:789:1:cpp)	1
-../Core/Src/main.cpp:789:1:cpp)	1
+/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.linux64_1.0.0.202410170706/tools/arm-none-eabi/include/c++/13.3.1/bits/basic_string.h:3727:5:bool std::operator==(const __cxx11::basic_string<_CharT, _Traits, _Alloc>&, const _CharT*) [with _CharT = char; _Traits = char_traits<char>; _Alloc = allocator<char>]	3
+../Core/Src/main.cpp:794:1:void __static_initialization_and_destruction_0()	1
+../Core/Src/main.cpp:794:1:void __static_initialization_and_destruction_1()	1
+../Core/Src/main.cpp:794:1:cpp)	1
+../Core/Src/main.cpp:794:1:cpp)	1
