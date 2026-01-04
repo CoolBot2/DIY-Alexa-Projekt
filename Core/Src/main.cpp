@@ -136,8 +136,9 @@ HAL_Delay(100);
 }
 void SteckdoseEin(){
 	funkSteckdose Steckdose(htim2);
-
+//	for (int i = 0; i < 10; ++i){
 Steckdose.ein();
+//}
 }
 void SteckdoseAus(){
 	funkSteckdose Steckdose(htim2);
@@ -194,23 +195,22 @@ void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s){
 	//value = HAL_GetTick();
 }
 
-std::string extract_features(){
+int extract_features(){
 
 
 	//filling of mMFCC
+	  char msg[64];
 
 	float mfccInputFrame[MFCC_IN_SIZE]; // input frame of mfcc
 	q7_t mfccOutTmp[MFCC_OUT_SIZE]; // result of mfcc
 	int feature_counter = 0;
-	for (int i = 0; i < 16000-MFCC_STEP_SIZE; i+=MFCC_STEP_SIZE,
+	for (int i = 0; i <= 16000-800; i+=MFCC_STEP_SIZE, // problem !!!!!
 	feature_counter++) {
 	for (int j = 0; j < MFCC_IN_SIZE; j++) {
-	if (i+j >= 16000)
-	mfccInputFrame[j] = 0;
-	else {
+
 	mfccInputFrame[j] = (float) testbuffer[i+j];
 	//printf("%f, ", mfccInputFrame[j]);
-	}
+
 	}
 	mfcc->mfcc_compute(mfccInputFrame, mfccOutTmp);
 
@@ -218,6 +218,7 @@ std::string extract_features(){
 
 	kws->mMFCC[feature_counter][k] = (ai_float) mfccOutTmp[k];// !!!! PREPARE MFCC VALUES AS INPUT FOR NN
 	}
+	if (feature_counter >= 47) break;
 	}
 
 
@@ -225,10 +226,13 @@ std::string extract_features(){
 
 	int wordIndex=kws->runInference(1);
 	std::string Word=kws->indexToWord(wordIndex);
-	printf("Ergebnis wort: %s \r\n",Word.c_str()); //cant use normal cpp strings in c so (to_cstr)
+//	printf("Ergebnis wort: %s \r\n",Word.c_str()); //cant use normal cpp strings in c so (to_cstr)
+	snprintf(msg, sizeof(msg), "Ergebnis: %s\r\n", Word.c_str());
+
+	HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
 
 
-	return Word;
+	return wordIndex;
 }
 /* USER CODE END 0 */
 
@@ -292,8 +296,8 @@ int main(void)
   while (1)
   {
 
-
 	  char msg[64];
+
 	  int32_t minVal =  std::numeric_limits<int>::max();
 	  int32_t maxVal = std::numeric_limits<int>::min();
 	  int32_t peak;
@@ -311,11 +315,11 @@ int main(void)
 	  if (peak < 0) peak = 0;
 
 
-	  if (peak > 50000) {
-		  peak = 50000;
-
-
-	  } //can be optimized
+//	  if (peak > 50000) {
+//		  peak = 50000;
+//
+//
+//	  } //can be optimized
 
 
 	  int leds = round( peak / 5000);             // 0…10 LEDs   1500
@@ -324,8 +328,7 @@ int main(void)
 
 	  //aufnahme test
 
-if(!isRecording && peak == 50000){
-	isRecording = 1;
+if(!isRecording && peak >15000){
 		  recordStart = HAL_GetTick(); //start time
 		  snprintf(msg, sizeof(msg), "aufnahme begiinnt...%d",1);
 
@@ -339,21 +342,27 @@ if(!isRecording && peak == 50000){
 		 		  }
 		 	  }
 		 	  recordIndex=PRERECORD;
-
+		 	    isFinished  = 0;
+		 	    isRecording = 1;
 }
+
 //hrrhrhhr
 	  if(isFinished){
 		  isFinished=0;
 		   duration = HAL_GetTick()-recordStart;
 		   snprintf(msg, sizeof(msg), "duration: %ld \r\n", duration);
 		   	  HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-		   	  printf("Feature extraction started\r\n");
-		   	  std::string word=extract_features();
-		   	  printf("Feature extraction ended\r\n");
-		   	  if(word =="ON"){
+
+		   	HAL_UART_Transmit(&huart3, (uint8_t*)("Feature extraction started\r\n"), strlen("Feature extraction started\r\n"), HAL_MAX_DELAY);
+		   	  int wordIdx=extract_features();
+
+		   HAL_UART_Transmit(&huart3, (uint8_t*)("Feature extraction ended\r\n"), strlen("Feature extraction ended\r\n"), HAL_MAX_DELAY);
+		   	  if(wordIdx ==2){
+				   HAL_UART_Transmit(&huart3, (uint8_t*)("your mom gay"), strlen("your mom gay"), HAL_MAX_DELAY);
+
 		   		SteckdoseEin();
 		   	  }
-		   	  else if(word=="OFF"){
+		   	  else if(wordIdx==3){
 		   		  SteckdoseAus();
 		   	  }
 	  }
