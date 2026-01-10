@@ -25,14 +25,15 @@
 #include <stdio.h>
 #include <math.h>
 #include <iostream>
+#include <limits>
+#include "lcd.h"
 #include "LEDArray.h"
 #include "funkSteckdose.h"
 #include "mfcc.h"
 #include "kws.h"
-#include <limits>
 #include "arm_math.h"
 
-
+//konstanten
 const int I2S_BUF_SIZE = 1000;
 const int totalBuffer = 16000;
 #define MFCC_IN_SIZE 800
@@ -40,29 +41,58 @@ const int totalBuffer = 16000;
 #define MFCC_OUT_SIZE 10
 #define PRERECORD 4000
 
+//optimization variables (ms)
+#define CLAPTHRESHHOLD 70000
+#define SPEECHTHRESHHOLD 15000
+#define LISTEN_TIMEOUT_MS  60000
+#define Clap_Cooldown 500
+
+volatile uint32_t clapTime=0;
 volatile uint8_t audioReady = 0;
 volatile uint8_t audioHalf = 0;
 volatile uint8_t isRecording=0;
 volatile uint8_t isFinished=0;
 volatile uint16_t recordIndex=0;
 volatile uint16_t preBufferIndex=0;
-
+volatile int32_t dc = 0;              // for dc offset
+int recordStart;
+int duration;
+int value;
 float mfccOut[MFCC_OUT_SIZE]; // result after typecast
+bool lockForever=0;
+bool isOn=0;
+//arrays
 uint16_t inputBuffer[I2S_BUF_SIZE*2]; // merge 2 consecutive values
 int32_t mergedFrame[I2S_BUF_SIZE/4]; // Why divide by 4?
 int32_t testbuffer[totalBuffer];
 int32_t preBuffer[PRERECORD];
-int recordStart;
-int duration;
-int value;
 
 uint16_t pins[]={
 		GPIO_PIN_15,GPIO_PIN_11,GPIO_PIN_10,GPIO_PIN_9,GPIO_PIN_8,GPIO_PIN_6,GPIO_PIN_5,GPIO_PIN_4,GPIO_PIN_3,GPIO_PIN_1,
 
 };
+
+
+
+//objekte
+
 LEDArray bar(GPIOB,pins,10);
 MFCC* mfcc = new MFCC(MFCC_OUT_SIZE, MFCC_IN_SIZE, 2);
 KWS* kws=new KWS();
+
+LCD_HandleTypeDef Display;
+
+
+
+
+
+
+typedef enum {
+    STATE_IDLE,
+    STATE_LISTENING
+} system_state_t;
+
+system_state_t systemState = STATE_IDLE;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -90,6 +120,8 @@ ADC_HandleTypeDef hadc1;
 
 ETH_HandleTypeDef heth;
 
+I2C_HandleTypeDef hi2c2;
+
 I2S_HandleTypeDef hi2s2;
 DMA_HandleTypeDef hdma_spi2_rx;
 
@@ -113,6 +145,7 @@ static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_I2S2_Init(void);
+static void MX_I2C2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -136,8 +169,9 @@ HAL_Delay(100);
 }
 void SteckdoseEin(){
 	funkSteckdose Steckdose(htim2);
-//	for (int i = 0; i < 10; ++i){
+//	for (int i = 0; i < 50; ++i){
 Steckdose.ein();
+//HAL_Delay(10);
 //}
 }
 void SteckdoseAus(){
@@ -150,12 +184,15 @@ Steckdose.aus();
 void processHalfBuffer(uint16_t* buf)
 {
     for (int i = 0; i < I2S_BUF_SIZE/4; ++i) {
+
         uint32_t hi = buf[4*i];
         uint32_t lo = buf[4*i + 1];
 
         uint32_t raw = (hi << 16) | lo;
         int32_t temp = (int32_t)raw;
         int32_t pcm = temp >> 14;
+
+
 
         mergedFrame[i] = pcm; // oder mergedFrame[offset + i] bei Streaming
         //prebuffer wird immer aufgenommen (kein uberschreitung nötig)
@@ -271,9 +308,15 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM2_Init();
   MX_I2S2_Init();
+  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
 
-
+//initialize disp
+  Display.i2c_addr= (0x27<<1);
+  Display.i2c=&hi2c2;//benutze i2c2
+  Display.backlight_enable=1;
+  LCD_Begin(&Display);
+  LCD_SetCursor(&Display, 1, 1);
 
 
 	  //SteckdoseAus();
@@ -325,10 +368,22 @@ int main(void)
 	  int leds = round( peak / 5000);             // 0…10 LEDs   1500
 
 	  bar.setnleds(leds);
+	  if (systemState == STATE_IDLE && !lockForever) {
 
+	      if (peak > CLAPTHRESHHOLD) {
+
+	          systemState = STATE_LISTENING;
+	          clapTime=HAL_GetTick();
+	          LCD_Print(&Display, "Listening...");
+
+			   	HAL_UART_Transmit(&huart3, (uint8_t*)("CLap \r\n"), strlen("CLAP \r\n"), HAL_MAX_DELAY);
+	      }
+	  }
 	  //aufnahme test
+if(systemState==STATE_LISTENING){
 
-if(!isRecording && peak >15000){
+
+if(!isRecording && peak >SPEECHTHRESHHOLD&&(HAL_GetTick()-clapTime)>Clap_Cooldown){//two gets recognized immediately after clap
 		  recordStart = HAL_GetTick(); //start time
 		  snprintf(msg, sizeof(msg), "aufnahme begiinnt...%d",1);
 
@@ -357,17 +412,37 @@ if(!isRecording && peak >15000){
 		   	  int wordIdx=extract_features();
 
 		   HAL_UART_Transmit(&huart3, (uint8_t*)("Feature extraction ended\r\n"), strlen("Feature extraction ended\r\n"), HAL_MAX_DELAY);
-		   	  if(wordIdx ==2){
+		   	  if(wordIdx ==2){//on
 				   HAL_UART_Transmit(&huart3, (uint8_t*)("your mom gay"), strlen("your mom gay"), HAL_MAX_DELAY);
 
-		   		SteckdoseEin();
+
+		   		LCD_Clear(&Display);
+		   		LCD_Print(&Display, "1. Forever");
+		   		LCD_SetCursor(&Display, 1, 0);
+		   		LCD_Print(&Display, "2. 10 min");
+		   		isOn=true;
+
 		   	  }
-		   	  else if(wordIdx==3){
+		   	  else if(wordIdx==3){//off
 		   		  SteckdoseAus();
+		   	  }
+		   	  else if(wordIdx==4 && isOn){
+		   		LCD_Clear(&Display);
+		   		LCD_Print(&Display, "1. Forever");
+		   		SteckdoseEin();
+		   		lockForever=1;
+		   		systemState=STATE_IDLE;//konnte problematisch sein
+
+		   	  }
+		   	  else if(wordIdx==5 && isOn){
+		   		LCD_Clear(&Display);
+		   	    LCD_Print(&Display, "2. 10 min");
+		   	    HAL_Delay(60000);
+		   	    SteckdoseAus();
 		   	  }
 	  }
 
-
+}
 
 
 
@@ -527,6 +602,54 @@ static void MX_ETH_Init(void)
   /* USER CODE BEGIN ETH_Init 2 */
 
   /* USER CODE END ETH_Init 2 */
+
+}
+
+/**
+  * @brief I2C2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C2_Init(void)
+{
+
+  /* USER CODE BEGIN I2C2_Init 0 */
+
+  /* USER CODE END I2C2_Init 0 */
+
+  /* USER CODE BEGIN I2C2_Init 1 */
+
+  /* USER CODE END I2C2_Init 1 */
+  hi2c2.Instance = I2C2;
+  hi2c2.Init.ClockSpeed = 100000;
+  hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c2.Init.OwnAddress1 = 0;
+  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c2.Init.OwnAddress2 = 0;
+  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c2, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c2, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C2_Init 2 */
+
+  /* USER CODE END I2C2_Init 2 */
 
 }
 
@@ -707,6 +830,7 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
